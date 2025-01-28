@@ -1,0 +1,38 @@
+.like-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: grey;
+    cursor: pointer;
+}
+.like {
+    background-color: red;
+}
+
+p {
+    font-size: 16px;
+} 
+
+/* .like-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.like-circle {
+    width: 40px;
+    height: 40px;
+    background-color: grey;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.like-circle.like {
+    background-color: red;
+}
+
+p {
+    margin: 0;
+    font-size: 16px;
+} */

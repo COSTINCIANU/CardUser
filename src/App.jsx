@@ -1,69 +1,57 @@
-import './App.css'
-
-import Card from './components/Card';
+import React, { useState } from 'react';
+import Card from './components/Card/Card'; // Importation du composant Card
 
 const USERS = [
     {
-        image: "https://picsum.photos/100",
-        pseudo: "Jean Dupont",
-        email: "jean.dupont@example.com",
-        description: "Développeur passionné par React.",
-        sexe: "homme"
+        image: "https://picsum.photos/80",
+        pseudo: 'Alice',
+        email: 'alice@example.com',
+        description: 'Frontend developer.',
+        sexe: 'femme',
     },
     {
-        image: "https://picsum.photos/101",
-        pseudo: "Marie Curie",
-        email: "marie.curie@example.com",
-        description: "Scientifique spécialisée en physique.",
-        sexe: "femme"
+        image: "https://picsum.photos/70",
+        pseudo: 'Bob',
+        email: 'bob@example.com',
+        description: 'Backend developer.',
+        sexe: 'homme',
     },
     {
-        image: "https://picsum.photos/102",
-        pseudo: "Alex Taylor",
-        email: "alex.taylor@example.com",
-        description: "Designer UI/UX.",
-        sexe: "non-binaire"
+        image: "https://picsum.photos/60",
+        pseudo: 'Charlie',
+        email: 'charlie@example.com',
+        description: 'Fullstack developer.',
+        sexe: 'non-binaire',
     },
-    {
-        image: "https://picsum.photos/100",
-        pseudo: "Jean Tuch",
-        email: "jean.dupont@example.com",
-        description: "Développeur passionné par React.",
-        sexe: "homme"
-    },
-    {
-        image: "https://picsum.photos/101",
-        pseudo: "Marie Dupont",
-        email: "marie.curie@example.com",
-        description: "Scientifique spécialisée en physique.",
-        sexe: "femme"
-    },
-    {
-        image: "https://picsum.photos/102",
-        pseudo: "Tom Taylor",
-        email: "alex.taylor@example.com",
-        description: "Designer UI/UX.",
-        sexe: "non-binaire"
-    }
 ];
 
 function App() {
+    const [search, setSearch] = useState(''); // État pour la barre de recherche
+
+    // Filtrer les utilisateurs selon la recherche
+    const USERS_LIST = USERS.filter((user) =>
+        user.pseudo.toLowerCase().includes(search.toLowerCase())
+    );
+
     return (
         <>
-            <h1>{USERS.length > 0 ? "Liste des Utilisateurs" : "Aucun utilisateur d’inscrit"}</h1>
-            {USERS.length > 0 && <p>Il y a {USERS.length} utilisateurs inscrits !</p>}
-            <div>
-                {USERS.map((user, index) => (
-                    <Card
-                        key={index}
-                        image={user.image}
-                        pseudo={user.pseudo}
-                        email={user.email}
-                        description={user.description}
-                        sexe={user.sexe}
-                    />
-                ))}
-            </div>
+            <h1>
+                {USERS_LIST.length > 0
+                    ? 'Liste des Utilisateurs'
+                    : 'Aucun utilisateur inscrit'}
+            </h1>
+            {USERS_LIST.length > 0 && (
+                <p>Il y a {USERS_LIST.length} utilisateurs inscrits !</p>
+            )}
+            <input
+                type="text"
+                placeholder="Rechercher un pseudo..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+            />
+            {USERS_LIST.map((user, index) => (
+                <Card key={index} {...user} /> // Transmission des données utilisateur via props
+            ))}
         </>
     );
 }
